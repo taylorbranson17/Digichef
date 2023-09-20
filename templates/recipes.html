@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block links %}
+<link href="/static/recipes.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container pb-5">
+    <div class="row" id="theme" {% if session.get('theme') %}
+        style="background-image: url( {{'/static/uploads/' + session['theme'] }} );" {% else %}
+        style="background-image:url('/static/images/theme2.jpg');" {% endif %}>
+    </div>
+    <div class="row">
+        <div class="col-auto ms-4 align-self-start title">
+            <h1>{{ session['first_name'] }}'s Recipes</h1>
+        </div>
+        <div class="col-2 py-3 ms-auto text-center addtab" id="title">
+            <a id="addbtn" href="/recipes/add"><img src="/static/images/add.png" class="img-fluid addbtn"></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 mx-auto">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="row">
+                <div class="col-4 text-center" id="update">
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            {% endwith %}
+            <div class="row pt-4">
+                {% if data %}
+                {% for row in data %}
+                <div class="col-md-3 cardCon">
+                    <div class="row">
+                        <div class="col-9 p-0">
+                            <div class="card" style="width: 18rem;">
+                                <a href="/recipe/{{ row.id }}/view" class="stretched-link"></a>
+                                <img src="/static/uploads/{{ row.img }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ row.name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 p-2 align-self-start tab">
+                            <div class="row justify-content-center">
+                                <div class="col-auto p-1">
+                                    <a href="/recipe/{{ row.id }}/edit"><button type="button" class="btn btn-neutral"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path
+                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                            <path fill-rule="evenodd"
+                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                        </svg></button></a>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-auto p-1">
+                                    <a href="/recipe/{{ row.id }}/delete"><button type="button" class="btn btn-neutral trash"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                        </svg></button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                {% endfor %}
+                {% else %}
+                <div class="col-md-6">
+                    <h3>No Recipes yet! Add some, and let's get Cookin!</h3>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+        $('.trash').on('click', function(e){
+            e.preventDefault()
+            url = $(e.target).closest('a').attr('href');
+            if(confirm("Are you sure you want to delete this delicious recipe?")){
+                document.location = url;
+            }
+        })
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block links %}
+<link href="/static/login.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row" id="main">
+        <div class="col-md-7" id="theme">
+        </div>
+        <form class="col-md-5" action="/login" method="POST">
+            <div class="row">
+                <div class="col-md-4 align-self-end">
+                    <h2>Login</h2>
+                </div>
+                <div class="col-md-7 text-end">
+                    <img src="/static/images/DigiChef2.png" class="img-fluid">
+                </div>
+            </div>
+            {% with messages = get_flashed_messages() %} 
+            {% if messages %} 
+            <div class="row py-2">
+                <div class="col-8 text-center" id="feedback">
+                    <ul>
+                        {% for message in messages %} 
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            {% endwith %}
+            <div class="row py-2">
+                <div class="col-8">
+                    <input type="email" class="form-control" name="username" placeholder="Email">
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col-8">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col-4">
+                    <p>New? Sign up <a href="/register">Here</a></p>
+                </div>
+                <div class="col-4 text-end">
+                    <button type="submit" class="btn btn-primary px-3">Login</button>
+                </div>
+            </div>
+        </form>
+       
+    </div>
+</div>
+{% endblock %}

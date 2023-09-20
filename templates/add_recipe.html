@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block links %}
+<link href="/static/recipe.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row" id="theme" {% if session.get('theme') %}
+        style="background-image: url( {{'/static/uploads/' + session['theme'] }} );" {% else %}
+        style="background-image:url('/static/images/theme2.jpg');" {% endif %}>
+    </div>
+</div>
+<form class="container pt-4" action="{{ action }}" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-auto ms-2" id="title">
+            <h1 id="main">{% if data %}{{ data.name }}{% else %}New Recipe{% endif %}</h1>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-md-8">
+            <div class="row py-2">
+                <div class="col-md-4">
+                    <label for="name">Recipe Name:</label>
+                    <input type="text" class="form-control" name="name" {% if data %}value="{{ data.name }}"{% endif %}>
+                </div>
+                <div class="col-md-3">
+                    <label for="cooktime">Cook Time:</label>
+                    <input type="number" class="form-control" name="cooktime" aria-describedby="cookTimeHelp" {% if data
+                        %} value="{{ data['cooktime'] }}" {% endif %}>
+                    <div id="cookTimeHelp" class="form-text">Total Cook Time in minutes.</div>
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col-md-5">
+                    <label for="ingredients">Ingredients List:</label>
+                    <textarea class="form-control" name="ingredients"
+                        aria-describedby="IngredHelp">{% if data %}{{ data['ingredients'] }}{% endif %}</textarea>
+                    <div id="IngredHelp" class="form-text">Quantity - ingredient name.</div>
+                </div>
+                <div class="col-md-5">
+                    <label for="instructions">Instructions:</label>
+                    <textarea class="form-control" name="instructions"
+                        aria-describedby="InstrucHelp">{% if data %}{{ data['instructions'] }}{% endif %}</textarea>
+                    <div id="InstrucHelp" class="form-text">Step by step instructions for the recipe.</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 py-3 align-self-start" id="addInfo">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="mx-auto my-2 img_example" {% if data %}
+                        style="background-image: url({{'/static/uploads/' + data['img']}})" {% else %}
+                        style="background-color:darkgray" {% endif %}></div>
+                    <input type="file" name="recipeimg" id="recImg">
+                    <button type="button" class="btn btn-secondary px-2" id="recImgBtn">Add Image</button>
+                </div>
+            </div>
+            <div class="row py-3">
+                <div class="col">
+                    <label for="notes">Additional Notes:</label>
+                    <textarea class="form-control" type="text" name="notes">{% if data %}{{ data['notes'] }}{% endif %}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row py-4">
+        <div class="col-2 text-center mx-auto">
+            <button type="submit" class="btn btn-success px-4">Save</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        $('#recImgBtn').on('click', function () {
+            $('#recImg').click()
+        })
+        $('#recImg').on('input', function () {
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                $('.img_example').css({
+                    backgroundImage: 'url(' + reader.result + ')'
+                })
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+            }
+        })
+
+        $('input[name="name"]').on('input',function(){
+            $('#main').text($('input[name="name"]').val())
+        })
+    })
+</script>
+{% endblock %}

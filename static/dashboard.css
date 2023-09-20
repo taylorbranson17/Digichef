@@ -1,0 +1,35 @@
+#profile {
+    max-height: 200px;
+    border-radius: 50%;
+    margin-top: -50%;
+    border: 2px solid white;
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: whitesmoke;
+}
+
+.pop {
+    box-shadow: 0 0 5px 2px darkgrey;
+    border-radius: 20px;
+}
+
+.card {
+    max-width: 100%;
+    max-height: 100%;
+    
+}
+
+#quote {
+    background-image: linear-gradient(rgb(0,0,0,0.5), rgb(0,0,0,0.5)),url('/static/images/palms.jpg');
+    background-position: center;
+    background-size: cover;
+    color: white;
+    font-size: 1.4rem;
+    border-radius: 15px 0 15px 0;
+}
+
+#quote .row{
+    height: 100%;
+}

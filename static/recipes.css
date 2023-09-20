@@ -1,0 +1,45 @@
+
+.addbtn:hover{
+    scale: 1.1;
+    border-radius: 50%;
+    box-shadow: 0 0 5px 2px darkgray;
+    transition: 0.4s ease-out;
+}
+
+.special{
+    font-family: 'Delicious-Handr'
+}
+
+.title{
+    margin-top: -4%!important;
+    background-color: white;
+    border-radius: 15px;
+}
+
+h1 {
+    display: inline-block;
+    font-size: 3rem!important;
+}
+
+.addtab {
+    background-color: rgb(219, 217, 217,0.5);
+    border-radius: 0 0 20px 20px;
+}
+
+.card{
+    max-width: 100%;
+}
+
+.tab button{
+    background-color: rgb(255,255,255,0.6);
+}
+
+a {
+    text-decoration: none!important;
+    color: black!important;
+}
+
+.tab {
+    border-radius: 0 10px 10px 0;
+    background-color: rgb(219, 217, 217,0.5);
+}

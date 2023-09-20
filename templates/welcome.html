@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block links %}
+<link href="/static/welcome.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row" id="theme">
+        <div class="container">
+            <div class="row" id="theme">
+                <div class="col-md-4 text-center shade">
+                    <h1>Your Food.</h1>
+                </div>
+                <div class="col-md-4 text-center align-self-center">
+                    <img class="main" src="static/images/DigiChefWht.png">
+                </div>
+                <div class="col-md-4 align-self-end text-center">
+                    <h1>Your Passion.</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row pt-5">
+        <div class="col-6 mx-auto text-center">
+            <a href="/login">
+                <h2 id="login" class="p-3">Login</h2>
+            </a>
+            <a href="/register">
+                <h2 id="signup" class="p-3">Sign Up</h2>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

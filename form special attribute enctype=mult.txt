@@ -1,0 +1,9 @@
+<form> special attribute: enctype="multipart/form-data"
+
+inside form will be special input: <input type="file">
+
+request.files['name_of_input'] allows you to fish out the files the User uploads.
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER for storing files.
+
+werkzeug.utils import secure_filename -> to secure files and prevent hacking.

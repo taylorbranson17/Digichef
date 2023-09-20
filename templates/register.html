@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block links %}
+<link href="/static/register.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container pb-5">
+    <form actions="{{ action }}" method='POST' class="row py-5" enctype="multipart/form-data">
+        <div class="col-md-6 mx-auto">
+            <div class="row pb-3">
+                <div class="col-md-6 text-center align-self-center">
+                    <h1>{{ message }}</h1>
+                </div>
+                <div class="col-md-4 ms-auto text-center">
+                    <img src="/static/images/DigiChef2.png" class="img-fluid">
+                </div>
+            </div>
+            {% if errors %}
+            <div class="row">
+                <div class="col-6 mx-auto text-center py-2 px-3" id="feedback">
+                    <ul>
+                        {% for item in errors.keys() %}
+                        <li>{{ errors[item] }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mx-auto" id="profile_example" {% if data %}
+                                style="background-image: url({{'/static/uploads/' + data.img }})" {% else %}
+                                style="background-color:darkgray" {% endif %}></div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mx-auto" id="theme_example" {% if data %}
+                                style="background-image: url({{'/static/uploads/' + data.theme }})" {% else %}
+                                style="background-color:darkgray" {% endif %}></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 text-center p-2">
+                            <input type="file" class="form-control-sm" name="profile_image" id="profImg">
+                            <button type="button" class="btn btn-secondary p-2" id="falseprofile">Change Profile</button>
+                        </div>
+                        <div class="col-6 text-center p-2">
+                            <input type="file" class="form-control-sm" name="theme_image" id="themeImg">
+                            <button type="button" class="btn btn-secondary p-2" id="falsetheme">Change Theme</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col-md-6">
+                    <input class="form-control" name="first_name" placeholder="First Name" type="text" {% if data %}
+                        value="{{ data['first_name']}}" {% endif %}>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" name="last_name" placeholder="Last Name" type="text" {% if data %}
+                        value="{{data['last_name']}}" {% endif %}>
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col">
+                    <input type="email" class="form-control" name="email" placeholder="Email" {% if data %}
+                        value="{{data['email']}}" {% endif %}>
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col-md-6">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+                <div class="col-md-6">
+                    <input type="password" class="form-control" name="confirm" placeholder="Confirm Password">
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col text-end">
+                    <button type="submit" class="btn btn-primary px-3">{{ btn_label }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %} 
+<script>
+    $(document).ready(function(){
+        $('#falsetheme').on('click', function(){
+            $('#themeImg').click()
+        })
+        $('#falseprofile').on('click', function(){
+            $('#profImg').click()
+        })
+
+        $('#themeImg').on('input', function(){
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                $('#theme_example').css({
+                backgroundImage: 'url('+reader.result+')'
+            })
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+            } 
+        })
+        $('#profImg').on('input', function(){
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                $('#profile_example').css({
+                backgroundImage: 'url('+reader.result+')'
+            })
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+            } 
+        })
+    })
+</script>
+{% endblock %}

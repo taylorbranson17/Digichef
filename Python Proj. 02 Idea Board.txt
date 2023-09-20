@@ -1,0 +1,14 @@
+Python Proj. 02 Idea Board:
+
+"Recipe Book"
+
+- Login/Signup Screen
+	- Username/Password
+	- Register [email, password, firstname, lastname]
+
+- New Recipe Screen
+	- Cook Time
+	- Prep Time
+	- Ingredients
+	- Instructions
+	- Notes

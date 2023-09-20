@@ -1,0 +1,15 @@
+#profile_example, #theme_example {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+}
+
+#profile_input, #theme_input {
+    display: none;
+}
+
+#profImg, #themeImg{
+    display: none;
+}
